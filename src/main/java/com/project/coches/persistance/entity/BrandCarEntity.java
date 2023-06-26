@@ -9,7 +9,7 @@ import lombok.Setter;
 //entity para indicar que es una entidad y table para agragarle la entidad de la base de datos
 @Entity
 @Table(name = "marca_coche")
-public class MarchaCocheEntity {
+public class BrandCarEntity {
     //hay que manejarlo con tipo de datos wraper, tipos primitivos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //el que hace que sea autoincrementable
