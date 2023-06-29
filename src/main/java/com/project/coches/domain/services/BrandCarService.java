@@ -51,6 +51,20 @@ public class BrandCarService implements IBrandCarService {
         return iBrandCarRepository.save(newBrandCar);
     }
 
+
+    /**
+     *Actualiza una marca coche
+     * @param newBrandCar marca coche a actualizar
+     * @return optional con coche a actualizar
+     */
+    @Override
+    public Optional <BrandCarPojo>update(BrandCarPojo newBrandCar) {
+        if (iBrandCarRepository.getBrandCar(newBrandCar.getId()).isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(iBrandCarRepository.save(newBrandCar));
+    }
+
     /**
      * Elimina una marca coche dada su id
      * @param idBrandCar id del marca coche a eliminar
@@ -58,12 +72,13 @@ public class BrandCarService implements IBrandCarService {
      */
     @Override
     public boolean delete(Integer idBrandCar) {
-        try {
-            iBrandCarRepository.delete(idBrandCar);
-            return true;
-        }catch (Exception e){
+
+        if (iBrandCarRepository.getBrandCar(idBrandCar).isEmpty()){
             return false;
-    }
+        }
+
+        iBrandCarRepository.delete(idBrandCar);
+        return true;
 
     }
 }

@@ -14,6 +14,10 @@ public class BrandCarEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //el que hace que sea autoincrementable
     private Integer id;
+
+    /**
+     * Descripcion de la marca
+     */
     @Column(name = "descripcion")
     private String description;
 
