@@ -1,4 +1,4 @@
-package com.project.coches.domain.pojo;
+package com.project.coches.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 //pojo de marcha_coche
-public class BrandCarPojo {
+public class BrandCarDto {
 
     //id de la marca
     private Integer id;

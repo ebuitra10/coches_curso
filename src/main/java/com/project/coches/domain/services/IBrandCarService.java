@@ -1,20 +1,20 @@
 package com.project.coches.domain.services;
 
-import com.project.coches.domain.pojo.BrandCarPojo;
+import com.project.coches.domain.dto.BrandCarDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IBrandCarService {
 
-        List<BrandCarPojo> getAll();
+        List<BrandCarDto> getAll();
 
 
         /*devuelve una lista con todas las marcas de coches*/
 
 
 
-        Optional<BrandCarPojo> getBrandCar(Integer id);
+        Optional<BrandCarDto> getBrandCar(Integer id);
 
         /**
          * guarda una nueva marca coche
@@ -22,7 +22,7 @@ public interface IBrandCarService {
          * @param newBrandCar Marca coche a guardar
          * @return Marca coche guardada
          */
-        BrandCarPojo save(BrandCarPojo newBrandCar);
+        BrandCarDto save(BrandCarDto newBrandCar);
 
 
         /**
@@ -30,7 +30,7 @@ public interface IBrandCarService {
          * @param newBrandCar marca coche a actualizar
          * @return Marca coche actualizada
          */
-        Optional <BrandCarPojo> update(BrandCarPojo newBrandCar);
+        Optional <BrandCarDto> update(BrandCarDto newBrandCar);
 
         /**
          * Elimina una marca coche dado su id
