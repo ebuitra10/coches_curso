@@ -10,8 +10,8 @@ public interface IBrandCarRepository {
 /*devuelve una lista con todas las marcas de coches*/
     List<BrandCarDto> getAll();
 
-    /*devuelve una marca coche dada su id*/
-    /*optional impide que se llame a la excepcion nullpointerexception para que el programa no se rompa
+    /*devuelve una marca coche dada su id
+    optional impide que se llame a la excepcion nullpointerexception para que el programa no se rompa
     (traer un objeto nulo)*/
     Optional<BrandCarDto> getBrandCar(Integer id);
 
