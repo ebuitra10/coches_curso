@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ICarMapper {
 
+    @Mapping(source = "brandCarEntity.description", target = "brandCarId")
     CarDto toCarDto(CarEntity carEntity);
 
 

@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class CustomerDto {
 
+
     private String cardId;
 
     private String fullName;
@@ -18,7 +19,7 @@ public class CustomerDto {
 
     private String password;
 
-    @Override
+    private String rol;
     public String toString() {
         return "CustomerDto{" +
                 "cardId='" + cardId + '\'' +
@@ -27,6 +28,7 @@ public class CustomerDto {
                 ", numberCellphone=" + numberCellphone +
                 ", active=" + active +
                 ", password='" + password + '\'' +
+                ", rol='" + rol + '\'' +
                 '}';
     }
 }

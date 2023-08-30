@@ -22,7 +22,6 @@ public class BrandCarController {
      */
     private final IBrandCarUseCase iBrandCarUseCase;
 
-
     /**
      * Devuelve lista de marcas coche
      * @return HttpCode Ok con lista de marcas coche
@@ -79,7 +78,5 @@ public class BrandCarController {
     public ResponseEntity <Boolean> delete(@PathVariable Integer id){
         return new ResponseEntity<>(this.iBrandCarUseCase.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
-
-
 
 }

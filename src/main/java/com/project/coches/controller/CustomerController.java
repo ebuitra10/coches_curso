@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping(path = "/customers")
 @RequiredArgsConstructor
@@ -36,13 +37,6 @@ public class CustomerController {
         return ResponseEntity.of(iCustomerUseCase.getCustomerByEmail(email));
     }
 
-    @PostMapping //Si es un save utilizo esta anotacion
-    public ResponseEntity<ResponseCustomerDto> save(@RequestBody CustomerDto customerDtoNew) {
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(iCustomerUseCase.save(customerDtoNew));
-
-    }
 
     @PatchMapping
     public ResponseEntity<CustomerDto> update(@RequestBody CustomerDto customerDtoUpdate) {

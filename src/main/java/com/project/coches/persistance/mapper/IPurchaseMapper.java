@@ -9,13 +9,13 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ICarPurchaseMapper.class})
 public interface IPurchaseMapper {
 
-    PurchaseRequestDto toPurchaseRequestDto(PurchaseEntity PurchaseEntity);
+
 
     @Mapping(target = "customerEntity", ignore = true)
     PurchaseEntity toPurchaseEntity(PurchaseRequestDto purchaseRequestDto);
 
-    List<PurchaseRequestDto> toPurchaseRequestDto(List<PurchaseEntity> toPurchaseEntity);
+
 }

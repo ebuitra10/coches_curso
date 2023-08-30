@@ -1,12 +1,17 @@
 package com.project.coches.domain.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Dto del guardado de la compra, su factura
  */
+@Getter@Setter
 public class PurchaseResponseDto {
+
     private Integer numberBill;
 
     private String cardIdCustomer;
@@ -17,5 +22,5 @@ public class PurchaseResponseDto {
 
     private String paymentMethod;
 
-    //private List<CarPurchaseRequestDto> carPurchase;
+    private List<CarPurchaseResponseDto> carPurchase;
 }

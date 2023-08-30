@@ -4,8 +4,11 @@ import com.project.coches.domain.dto.CustomerDto;
 import com.project.coches.domain.dto.ResponseCustomerDto;
 import com.project.coches.domain.repository.ICustomerRepository;
 import com.project.coches.domain.useCase.ICustomerUseCase;
+import com.project.coches.exception.CustomerExistsException;
 import com.project.coches.exception.EmailValidationException;
+import com.project.coches.security.Roles;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class CustomerService implements ICustomerUseCase {
 
     private final ICustomerRepository iCustomerRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<CustomerDto> getAll() {
@@ -42,31 +47,19 @@ public class CustomerService implements ICustomerUseCase {
             throw new EmailValidationException();
         }
 
+        if (getCustomerByCardId(newCustomer.getCardId()).isPresent() || getCustomerByEmail(newCustomer.getEmail()).isPresent()){
+            throw new CustomerExistsException();
+        }
+
         String passwordGenerated = generateRandomPassword(8);
-        newCustomer.setPassword(passwordGenerated);
+        newCustomer.setPassword(passwordEncoder.encode(passwordGenerated));
         newCustomer.setActive(1);
+        newCustomer.setRol(Roles.CUSTOMER);
         iCustomerRepository.save(newCustomer);
 
         return new ResponseCustomerDto(passwordGenerated);
     }
 
-    @Override
-    public Optional<CustomerDto> update(CustomerDto modifyCustomer) {
-        if (iCustomerRepository.getCustomerByCardId(modifyCustomer.getCardId()).isEmpty()){
-            return Optional.empty();
-        }
-        return Optional.of(iCustomerRepository.save(modifyCustomer));
-    }
-
-    @Override
-    public boolean delete(String cardId) {
-        if (iCustomerRepository.getCustomerByCardId(cardId).isEmpty()){
-            return false;
-        }
-
-        iCustomerRepository.delete(cardId);
-        return true;
-    }
 
     //metodo para generar una contraseña alfanumerica aleatoria de una longitud especifica
     private String generateRandomPassword(int len){
@@ -88,5 +81,23 @@ public class CustomerService implements ICustomerUseCase {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public Optional<CustomerDto> update(CustomerDto modifyCustomer) {
+        if (iCustomerRepository.getCustomerByCardId(modifyCustomer.getCardId()).isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(iCustomerRepository.save(modifyCustomer));
+    }
+
+    @Override
+    public boolean delete(String cardId) {
+        if (iCustomerRepository.getCustomerByCardId(cardId).isEmpty()){
+            return false;
+        }
+
+        iCustomerRepository.delete(cardId);
+        return true;
     }
 }
